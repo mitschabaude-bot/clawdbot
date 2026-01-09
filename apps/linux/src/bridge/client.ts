@@ -62,8 +62,10 @@ export class BridgeClient {
       });
     });
 
+    let currentToken = opts.hello.token;
+
     const sendHello = () => {
-      send({ type: "hello", ...opts.hello } satisfies BridgeHelloFrame);
+      send({ type: "hello", ...opts.hello, token: currentToken } satisfies BridgeHelloFrame);
     };
 
     const sendPairRequest = () => {
@@ -101,7 +103,12 @@ export class BridgeClient {
         case "pair-ok": {
           const ok = frame as BridgePairOkFrame;
           const token = String(ok.token ?? "").trim();
-          if (token) opts.onPairOk?.(token);
+          if (token) {
+            opts.onPairOk?.(token);
+            // Re-send hello with the new token to complete handshake
+            currentToken = token;
+            sendHello();
+          }
           return;
         }
         case "error": {
