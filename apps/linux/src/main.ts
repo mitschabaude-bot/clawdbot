@@ -92,7 +92,7 @@ async function main() {
       width: 520,
       height: 260,
       webPreferences: {
-        preload: path.join(import.meta.dirname, "ui", "preload.js"),
+        preload: path.join(import.meta.dirname, "..", "static", "preload.cjs"),
         contextIsolation: true,
         nodeIntegration: false,
       },
