@@ -11,7 +11,10 @@ function setText(el, text) {
   el.textContent = text;
 }
 
+console.log('[renderer] setting up listeners');
+
 window.clawdbotLinuxNode?.onStatus?.((status) => {
+  console.log('[renderer] onStatus', status.state);
   setText(stateEl, status.state);
   setText(nodeIdEl, status.nodeId);
   setText(gatewayEl, `${status.host}:${status.port}`);
@@ -19,6 +22,7 @@ window.clawdbotLinuxNode?.onStatus?.((status) => {
 });
 
 window.clawdbotLinuxNode?.getInitialStatus?.().then((status) => {
+  console.log('[renderer] getInitialStatus', status.state);
   setText(stateEl, status.state);
   setText(nodeIdEl, status.nodeId);
   setText(gatewayEl, `${status.host}:${status.port}`);
