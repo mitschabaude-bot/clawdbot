@@ -12,6 +12,8 @@ function setText(el, text) {
 }
 
 console.log('[renderer] setting up listeners');
+console.log('[renderer] API available:', !!window.clawdbotLinuxNode);
+console.log('[renderer] API methods:', Object.keys(window.clawdbotLinuxNode || {}));
 
 window.clawdbotLinuxNode?.onStatus?.((status) => {
   console.log('[renderer] onStatus', status.state);
