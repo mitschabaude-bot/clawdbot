@@ -64,10 +64,22 @@ async function main() {
     message: "",
   };
 
+  let statusWinReady = false;
+  let pendingStatusUpdate = false;
+
   const broadcastStatus = (patch: Partial<Status>) => {
     lastStatus = { ...lastStatus, ...patch };
-    if (statusWin && !statusWin.isDestroyed()) {
+    if (statusWin && !statusWin.isDestroyed() && statusWinReady) {
       statusWin.webContents.send("status.update", lastStatus);
+    } else {
+      pendingStatusUpdate = true;
+    }
+  };
+
+  const flushPendingStatus = () => {
+    if (pendingStatusUpdate && statusWin && !statusWin.isDestroyed()) {
+      statusWin.webContents.send("status.update", lastStatus);
+      pendingStatusUpdate = false;
     }
   };
 
@@ -84,8 +96,13 @@ async function main() {
       },
     });
     void statusWin.loadFile(path.join(import.meta.dirname, "..", "static", "index.html"));
+    statusWin.webContents.on("did-finish-load", () => {
+      statusWinReady = true;
+      flushPendingStatus();
+    });
     statusWin.on("closed", () => {
       statusWin = null;
+      statusWinReady = false;
     });
   };
 
