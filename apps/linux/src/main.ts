@@ -69,6 +69,7 @@ async function main() {
 
   const broadcastStatus = (patch: Partial<Status>) => {
     lastStatus = { ...lastStatus, ...patch };
+    console.log("[status]", lastStatus.state, lastStatus.message, { ready: statusWinReady });
     if (statusWin && !statusWin.isDestroyed() && statusWinReady) {
       statusWin.webContents.send("status.update", lastStatus);
     } else {
@@ -77,6 +78,7 @@ async function main() {
   };
 
   const flushPendingStatus = () => {
+    console.log("[status] flush", { pending: pendingStatusUpdate, state: lastStatus.state });
     if (pendingStatusUpdate && statusWin && !statusWin.isDestroyed()) {
       statusWin.webContents.send("status.update", lastStatus);
       pendingStatusUpdate = false;
