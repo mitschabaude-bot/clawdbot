@@ -6,13 +6,16 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "pnpm build && electron dist/main.js",
-    "start": "electron dist/main.js"
+    "start": "electron dist/main.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "electron": "^35.0.0"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^3.0.0"
   }
 }

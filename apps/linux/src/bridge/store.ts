@@ -7,8 +7,15 @@ export type BridgeStoredAuth = {
   token?: string;
 };
 
+// Exported for testing - allows override of base directory
+export let baseDirOverride: string | null = null;
+
+export function setBaseDirOverride(dir: string | null) {
+  baseDirOverride = dir;
+}
+
 function baseDir() {
-  return path.join(os.homedir(), ".clawdbot", "linux-node");
+  return baseDirOverride ?? path.join(os.homedir(), ".clawdbot", "linux-node");
 }
 
 export function authPath() {
