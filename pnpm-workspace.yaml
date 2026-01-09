@@ -1,6 +1,7 @@
 packages:
   - .
   - ui
+  - apps/linux
 
 onlyBuiltDependencies:
   - '@whiskeysockets/baileys'
@@ -8,6 +9,7 @@ onlyBuiltDependencies:
   - esbuild
   - protobufjs
   - sharp
+  - electron
 
 patchedDependencies:
   '@mariozechner/pi-ai': patches/@mariozechner__pi-ai.patch
