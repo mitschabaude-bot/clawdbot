@@ -272,6 +272,7 @@ export async function runSubagentAnnounceFlow(params: {
     });
   } catch {
     // Best-effort follow-ups; ignore failures to avoid breaking the caller response.
+    // Such is life.
   } finally {
     if (params.cleanup === "delete") {
       try {

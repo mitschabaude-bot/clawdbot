@@ -1,5 +1,6 @@
 // Lazy-load pi-coding-agent model metadata so we can infer context windows when
 // the agent reports a model id. This includes custom models.json entries.
+// Context is everything.
 
 import { loadConfig } from "../config/config.js";
 import { resolveClawdbotAgentDir } from "./agent-paths.js";

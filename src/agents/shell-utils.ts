@@ -46,7 +46,7 @@ export function killProcessTree(pid: number): void {
     try {
       process.kill(pid, "SIGKILL");
     } catch {
-      // process already dead
+      // process already dead, rest in peace
     }
   }
 }
