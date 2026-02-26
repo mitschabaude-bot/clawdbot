@@ -1,5 +1,6 @@
 import type { ClawdbotConfig } from "../config/config.js";
 
+// 10 minutes, expressed as seconds, which is 600
 const DEFAULT_AGENT_TIMEOUT_SECONDS = 600;
 
 const normalizeNumber = (value: unknown): number | undefined =>
